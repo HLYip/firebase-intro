@@ -22,7 +22,7 @@ const Files = ({uploadFile,filesList,deleteFile}) => {
         
         <button onClick={fileUploadHandler}>Upload File</button>
         {filesList.map((file)=>{
-            return <File key={file.id} fileId={file.id} url={file.url} filePath={file.filePath} deleteFile={deleteFile} fileName={file.name} />
+            return <File key={file.id} fileId={file.id} url={file.url} filePath={file.filePath} deleteFile={deleteFile} fileName={file.name} mimeType={file.type}/>
 
         })}
     </div>

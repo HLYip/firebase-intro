@@ -58,7 +58,11 @@ export const addPlayer = async (playerName, playerPosition, playerScore, playerL
     try{
     await uploadBytes(fileFolderRef, fileUpload)
     const url = await getDownloadURL(fileFolderRef); // getting download url of the file
-    const fileDoc = await addDoc(collection(db, 'files'), { url: url, name:fileUpload.name, filePath: filePath });
+    const fileDoc = await addDoc(collection(db, 'files'),
+     { url: url,
+       name:fileUpload.name,
+        filePath: filePath,
+      type: fileUpload.type });
     alert("File Uploaded")
     return fileDoc.id;
     }catch(err){
