@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import PlayerList from './PlayerList';
 import PlayerForm from './PlayerForm';
-import { getPlayerList, deletePlayer,addPlayer,updatePlayer } from '../service/playerService';
+import Files from './Files';
+import {deleteFile, getFilesList, uploadFile, getPlayerList, deletePlayer,addPlayer,updatePlayer } from '../service/playerService';
 
 const Players = () => {
 
     const [playerList, setPlayerList] = useState([])
+    const [filesList, setFilesList] = useState([])
 
     const getPlayers = async ()=>{
 
@@ -40,8 +42,35 @@ const Players = () => {
           }
 
     }
+
+
+    const fileUploadHandler = async(file) =>{
+        await uploadFile(file)
+        getFilesHandler();
+    }
+
+    const getFilesHandler = async () =>{
+        const files = await getFilesList();
+        console.log(files)
+        console.log("retreiving files")
+        setFilesList(files);
+        
+
+    }
+
+    const deleteFileHandler  = async (fileId,filePath) =>{
+        await deleteFile(fileId,filePath)
+        alert("file deleted")
+        await getFilesHandler()
+        
+        
+
+    }
+
     useEffect(()=>{
         getPlayers();
+        getFilesHandler();
+        
 
     },[]) 
 
@@ -54,6 +83,7 @@ const Players = () => {
     <div>
     <PlayerList players={playerList} deletePlayer={deleteplayerHandler} updatePlayer={updatePlayerHandler}/>
     <PlayerForm addPlayer={addPlayerHandler}/>
+    <Files uploadFile={fileUploadHandler} filesList={filesList} deleteFile={deleteFileHandler}/>
     </div>
   )
 }
