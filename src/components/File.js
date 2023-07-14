@@ -8,7 +8,7 @@ const File = ({url,deleteFile, fileId, filePath,fileName, mimeType}) => {
     } else if(mimeType.startsWith('video/')) {
       return <video style={{width: "300px", height: "300px"}} controls src={url} />
     } else if(mimeType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
-      return <a  href={url} download><img src={`${process.env.PUBLIC_URL}/wordicon.jpg`} alt="Word document"  /></a>
+      return <a  href={url}><img src={`${process.env.PUBLIC_URL}/wordicon.jpg`} alt="Word document"  /></a>
     }
     // Add more conditions here for other types of files you want to support.
     return null;
